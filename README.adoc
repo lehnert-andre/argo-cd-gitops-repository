@@ -1,0 +1,5 @@
+= GitOps Repository
+
+.Key facts
+* Argo CD observes this repository
+* Infrastructure as Code
