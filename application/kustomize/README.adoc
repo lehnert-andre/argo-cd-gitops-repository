@@ -1,1 +1,24 @@
 = Kustomize Example GitOps Application Repository
+
+
+
+env:
+        - name: ENVIRONMENT 
+          valueFrom:
+            configMapKeyRef:
+              name: settings
+              key: environment
+        - name: VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: settings
+              key: version
+        volumeMounts:
+        - name: setings
+          mountPath: "/config"
+          readOnly: true
+
+                  volumes:
+        - name: settings
+          configMap:
+            name: dev-settings
