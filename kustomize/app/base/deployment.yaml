@@ -24,11 +24,11 @@ spec:
         image: alehnert/argo-cd-application-repository:invalid
         resources:
           requests:
-            cpu: 10m
-            memory: 10Mi
+            cpu: 300m
+            memory: 500Mi
           limits:
-            cpu: 100m
-            memory: 20Mi
+            cpu: 1000m
+            memory: 700Mi
         args:
         - "-text=kustomize"
         env:
