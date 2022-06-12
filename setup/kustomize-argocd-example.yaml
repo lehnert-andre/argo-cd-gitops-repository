@@ -1,9 +1,16 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: kustomize
+  name: kustomize-dev
   labels:
-    kubernetes.io/metadata.name: kustomize
+    kubernetes.io/metadata.name: kustomize-dev
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kustomize-prod
+  labels:
+    kubernetes.io/metadata.name: kustomize-prod
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -13,8 +20,11 @@ metadata:
 spec:
   description: Example with Kustomize
   destinations:
-    - name: '*'
-      namespace: kustomize
+    - name: 'DEV'
+      namespace: kustomize-dev
+      server: 'https://kubernetes.default.svc'
+    - name: 'PROD'
+      namespace: kustomize-prod
       server: 'https://kubernetes.default.svc'
   namespaceResourceWhitelist:
     - group: '*'
@@ -30,7 +40,7 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: kustomize
+    namespace: kustomize-dev
     server: 'https://kubernetes.default.svc'
   source:
     path: kustomize/app/env/dev
@@ -56,7 +66,7 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: kustomize
+    namespace: kustomize-prod
     server: 'https://kubernetes.default.svc'
   source:
     path: kustomize/app/env/prod

@@ -1,5 +1,5 @@
 # Deployment targets
-namespace: kustomize
+namespace: kustomize-prod
 namePrefix: prod-
 
 # Extend the ../../base .yaml files
