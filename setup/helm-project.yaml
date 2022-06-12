@@ -4,4 +4,13 @@ metadata:
   name: gitops-helm
   namespace: argocd
 spec:
-  description: Example with Helm
+  description: Example with Kustomize
+  destinations:
+    - name: '*'
+      namespace: helm
+      server: 'https://kubernetes.default.svc'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - 'https://github.com/lehnert-andre/argo-cd-gitops-repository'
