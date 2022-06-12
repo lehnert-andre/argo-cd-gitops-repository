@@ -7,7 +7,7 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: "/kustomize/prod"
+        path: "/kustomize-prod"
         backend:
           service:
             name: app-service
