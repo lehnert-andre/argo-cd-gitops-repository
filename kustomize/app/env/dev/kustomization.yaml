@@ -11,8 +11,8 @@ resources:
 # Update with $ kustomize edit set image <name>=<newName>:<newTag>
 images:
 - name: alehnert/argo-cd-application-repository
-  newName: alehnert/argo-cd-application-repository
-  newTag: 2022-06-12-c11ecca
+  newName: alehnert/argo-cd-application-repositor
+  newTag: 09fec63d7eea8560b3a55f07d15d096cfaae4464
 
 # Create a ConfigMap based on the .env file
 # Final name: dev-settings referenced in the replacements section
