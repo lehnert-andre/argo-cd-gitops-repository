@@ -8,7 +8,7 @@ metadata:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: gitops-kustomize
+  name: kustomize
   namespace: argocd
 spec:
   description: Example with Kustomize
@@ -25,17 +25,18 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-dev
+  name: kustomize-app-dev
+  namespace: argocd
 spec:
   destination:
     name: ''
     namespace: kustomize
     server: 'https://kubernetes.default.svc'
   source:
-    path: application/kustomize/env/dev
+    path: kustomize/app/env/dev
     repoURL: 'https://github.com/lehnert-andre/argo-cd-gitops-repository.git'
     targetRevision: HEAD
-  project: gitops-kustomize
+  project: kustomize
   syncPolicy:
     automated:
       prune: true
@@ -50,17 +51,18 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-prod
+  name: kustomize-app-prod
+  namespace: argocd
 spec:
   destination:
     name: ''
     namespace: kustomize
     server: 'https://kubernetes.default.svc'
   source:
-    path: application/kustomize/env/prod
+    path: kustomize/app/env/prod
     repoURL: 'https://github.com/lehnert-andre/argo-cd-gitops-repository.git'
     targetRevision: HEAD
-  project: gitops-kustomize
+  project: kustomize
   syncPolicy:
     automated:
       prune: true

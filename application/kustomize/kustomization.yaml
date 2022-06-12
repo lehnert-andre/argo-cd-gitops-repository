@@ -1,4 +1,0 @@
-resources:
-- ./env/dev
-- ./env/prod
-namePrefix: kustomize-

@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: app-container
-        image: hashicorp/http-echo:0.2.3
+        image: alehnert/argo-cd-application-repository:invalid
         resources:
           requests:
             cpu: 10m

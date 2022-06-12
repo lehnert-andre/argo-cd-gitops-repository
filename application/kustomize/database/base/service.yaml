@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: db-service
+spec:
+  selector:
+    service: db-service
+  type: ClusterIP
+  ports:
+  - port: 5432

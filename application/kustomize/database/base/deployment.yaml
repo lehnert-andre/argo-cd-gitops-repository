@@ -1,0 +1,52 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: app-deployment
+  labels:
+    service: app-service
+spec:
+  selector:
+    matchLabels:
+      service: app-service
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 50%
+  template:
+    metadata:
+      labels:
+        service: app-service
+    spec:
+      containers:
+      - name: app-container
+        image: hashicorp/http-echo:0.2.3
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+          limits:
+            cpu: 100m
+            memory: 20Mi
+        args:
+        - "-text=kustomize"
+        env:
+        - name: ENVIRONMENT 
+          valueFrom:
+            configMapKeyRef:
+              name: settings
+              key: ENVIRONMENT
+        - name: VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: settings
+              key: VERSION
+        volumeMounts:
+        - name: settings
+          mountPath: "/config"
+          readOnly: true
+      volumes:
+      - name: settings
+        configMap:
+          name: settings

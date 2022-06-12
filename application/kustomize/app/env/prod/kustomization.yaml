@@ -1,0 +1,37 @@
+# Deployment targets
+namespace: kustomize
+namePrefix: prod-
+
+# Extend the ../../base .yaml files
+resources:
+- ./../../base
+
+# Current image version
+# Update with $ kustomize edit set image <name>=<newName>:<newTag>
+images:
+- name: alehnert/argo-cd-application-repository
+  newName: alehnert/argo-cd-application-repository
+  newTag: 2022-06-12-87614a7
+
+# Create a ConfigMap based on the .env file
+# Final name: prod-settings referenced in the replacements section
+configMapGenerator:
+- name: settings
+  behavior: create
+  options:
+    disableNameSuffixHash: true
+  envs:
+  - prod.env
+
+# Replace the ConfigMap name manually
+# Kustomize can update the references automatically (if the file is in the same directory), 
+# but our deployment.yaml is not part of this directory
+replacements:
+  - source:
+      kind: ConfigMap
+      name: prod-settings
+    targets:
+    - select:
+        kind: Deployment
+      fieldPaths: 
+      - spec.template.spec.volumes.[name=settings].configMap.name
