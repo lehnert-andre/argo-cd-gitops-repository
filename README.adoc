@@ -3,3 +3,7 @@
 .Key facts
 * Argo CD observes this repository
 * Infrastructure as Code
+
+
+
+k delete -n argocd applications.argoproj.io app-dev

@@ -3,5 +3,6 @@ resources:
 - ./../../base
 configMapGenerator:
 - name: settings
+  behavior: replace
   envs:
   - dev.env
