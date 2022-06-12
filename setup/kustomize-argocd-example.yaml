@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kustomize
+  labels:
+    kubernetes.io/metadata.name: kustomize
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: gitops-kustomize
+  namespace: argocd
+spec:
+  description: Example with Kustomize
+  destinations:
+    - name: '*'
+      namespace: kustomize
+      server: 'https://kubernetes.default.svc'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - 'https://github.com/lehnert-andre/argo-cd-gitops-repository'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-dev
+spec:
+  destination:
+    name: ''
+    namespace: kustomize
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: application/kustomize/env/dev
+    repoURL: 'https://github.com/lehnert-andre/argo-cd-gitops-repository.git'
+    targetRevision: HEAD
+  project: gitops-kustomize
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 2
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m0s
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-prod
+spec:
+  destination:
+    name: ''
+    namespace: kustomize
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: application/kustomize/env/prod
+    repoURL: 'https://github.com/lehnert-andre/argo-cd-gitops-repository.git'
+    targetRevision: HEAD
+  project: gitops-kustomize
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 2
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m0s
+
+
