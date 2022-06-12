@@ -29,8 +29,6 @@ spec:
           limits:
             cpu: 1000m
             memory: 700Mi
-        args:
-        - "-text=kustomize"
         env:
         - name: ENVIRONMENT 
           valueFrom:
