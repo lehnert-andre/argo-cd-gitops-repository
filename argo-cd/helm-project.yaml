@@ -1,0 +1,7 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: gitops-helm
+  namespace: argocd
+spec:
+  description: Example with Helm
