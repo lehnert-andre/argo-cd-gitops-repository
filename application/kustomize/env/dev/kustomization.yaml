@@ -10,7 +10,7 @@ resources:
 # Update with $ kustomize edit set image <name>=<newName>:<newTag>
 images:
 - newName: hashicorp/http-echo
-  newTag: 0.2.3
+  newTag: 0.2.1
 
 # Create a ConfigMap based on the .env file
 # Final name: dev-settings referenced in the replacements section
