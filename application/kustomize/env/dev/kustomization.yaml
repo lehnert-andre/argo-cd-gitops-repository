@@ -3,6 +3,17 @@ resources:
 - ./../../base
 configMapGenerator:
 - name: settings
-  behavior: replace
+  behavior: create
+  options:
+    disableNameSuffixHash: true
   envs:
   - dev.env
+replacements:
+  - source:
+      kind: ConfigMap
+      name: dev-settings
+    targets:
+    - select:
+        kind: Deployment
+      fieldPaths: 
+      - spec.template.spec.volumes.[name=settings].configMap.name
