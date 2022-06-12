@@ -5,6 +5,7 @@ namePrefix: prod-
 # Extend the ../../base .yaml files
 resources:
 - ./../../base
+- ingress.yaml
 
 # Current image version
 # Update with $ kustomize edit set image <name>=<newName>:<newTag>
@@ -36,6 +37,3 @@ replacements:
       fieldPaths: 
       - spec.template.spec.volumes.[name=settings].configMap.name
 
-# Patch the Ingress Route
-patchesStrategicMerge:
-- ingress.yaml

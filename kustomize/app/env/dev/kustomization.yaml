@@ -5,7 +5,7 @@ namePrefix: dev-
 # Extend the ../../base .yaml files
 resources:
 - ./../../base
-- ./ingress.yaml
+- ingress.yaml
 
 # Current image version
 # Update with $ kustomize edit set image <name>=<newName>:<newTag>
@@ -38,7 +38,3 @@ replacements:
       kind: Deployment
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
-# Patch the Ingress Route
-patchesStrategicMerge:
-- ingress.yaml
