@@ -12,7 +12,7 @@ resources:
 images:
 - name: alehnert/argo-cd-application-repository
   newName: alehnert/argo-cd-application-repository
-  newTag: 2022-06-12-1393db0
+  newTag: 2022-06-12-4ad2410
 
 # Create a ConfigMap based on the .env file
 # Final name: dev-settings referenced in the replacements section
