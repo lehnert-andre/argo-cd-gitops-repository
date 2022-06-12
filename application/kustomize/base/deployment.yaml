@@ -16,6 +16,13 @@ spec:
       containers:
       - name: nginx
         image: nginx
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10mb
+          limits:
+            cpu: 100m
+            memory: 100mb
         env:
         - name: ENVIRONMENT 
           valueFrom:
@@ -34,4 +41,4 @@ spec:
         volumes:
         - name: settings
           configMap:
-            name: settings
+            name: dev-settings
