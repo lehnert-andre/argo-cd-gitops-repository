@@ -35,3 +35,7 @@ replacements:
         kind: Deployment
       fieldPaths: 
       - spec.template.spec.volumes.[name=settings].configMap.name
+
+# Patch the Ingress Route
+patchesStrategicMerge:
+- ingress.yaml
