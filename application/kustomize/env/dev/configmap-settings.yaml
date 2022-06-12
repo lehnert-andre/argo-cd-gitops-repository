@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: settings
-data:
-  environment: dev
-  version: 1.0.0

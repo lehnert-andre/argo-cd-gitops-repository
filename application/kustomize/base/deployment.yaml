@@ -34,11 +34,7 @@ spec:
             configMapKeyRef:
               name: settings
               key: version
-        volumeMounts:
-        - name: setings
-          mountPath: "/config"
-          readOnly: true
         volumes:
         - name: settings
           configMap:
-            name: dev-settings
+            name: settings
