@@ -1,6 +1,10 @@
+
+namespace: kustomize
 namePrefix: dev-
+
 resources:
 - ./../../base
+
 configMapGenerator:
 - name: settings
   behavior: create
@@ -8,6 +12,7 @@ configMapGenerator:
     disableNameSuffixHash: true
   envs:
   - dev.env
+  
 replacements:
   - source:
       kind: ConfigMap

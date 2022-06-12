@@ -7,3 +7,5 @@
 
 
 k delete -n argocd applications.argoproj.io app-dev
+
+k delete -n argocd applications.argoproj.io app-dev && k delete namespace kustomize && k create namespace kustomize && k apply -n argocd -f kustomize-app.yaml

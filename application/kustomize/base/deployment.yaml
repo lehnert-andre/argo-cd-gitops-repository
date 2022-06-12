@@ -28,12 +28,12 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: settings
-              key: environment
+              key: ENVIRONMENT
         - name: VERSION
           valueFrom:
             configMapKeyRef:
               name: settings
-              key: version
+              key: VERSION
         volumeMounts:
         - name: settings
           mountPath: "/config"
