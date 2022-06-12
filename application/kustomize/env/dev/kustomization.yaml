@@ -1,6 +1,5 @@
 namePrefix: dev-
 resources:
-- ./configmap-settings.yaml
 - ./../../base
 configMapGenerator:
 - name: settings
