@@ -1,10 +1,20 @@
-
+# Deployment targets
 namespace: kustomize
 namePrefix: dev-
 
+# Extend the ../../base .yaml files
 resources:
 - ./../../base
 
+# Current image version
+# Update with $ kustomize edit set image <name>=<newName>:<newTag>
+images:
+- name: hashicorp/http-echo
+- newName: hashicorp/http-echo
+  newTag: 0.2.3
+
+# Create a ConfigMap based on the .env file
+# Final name: dev-settings referenced in the replacements section
 configMapGenerator:
 - name: settings
   behavior: create
@@ -12,7 +22,10 @@ configMapGenerator:
     disableNameSuffixHash: true
   envs:
   - dev.env
-  
+
+# Replace the ConfigMap name manually
+# Kustomize can update the references automatically (if the file is in the same directory), 
+# but our deployment.yaml is not part of this directory
 replacements:
   - source:
       kind: ConfigMap
