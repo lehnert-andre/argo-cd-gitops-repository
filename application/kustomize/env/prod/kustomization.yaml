@@ -1,3 +1,23 @@
+namespace: kustomize
+namePrefix: prod-
+
 resources:
 - ./../../base
-namePrefix: prod-
+
+configMapGenerator:
+- name: settings
+  behavior: create
+  options:
+    disableNameSuffixHash: true
+  envs:
+  - prod.env
+  
+replacements:
+  - source:
+      kind: ConfigMap
+      name: prod-settings
+    targets:
+    - select:
+        kind: Deployment
+      fieldPaths: 
+      - spec.template.spec.volumes.[name=settings].configMap.name

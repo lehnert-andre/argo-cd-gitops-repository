@@ -1,21 +1,27 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: nginx-deployment
+  name: app-deployment
   labels:
-    app: nginx
+    service: app-service
 spec:
   selector:
     matchLabels:
-      app: nginx
+      service: app-service
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 2
   template:
     metadata:
       labels:
-        app: nginx
+        service: app-service
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: app-container
+        image: hashicorp/http-echo:0.2.3
         resources:
           requests:
             cpu: 10m
@@ -23,6 +29,8 @@ spec:
           limits:
             cpu: 100m
             memory: 20Mi
+        args:
+        - "-text=kustomize"
         env:
         - name: ENVIRONMENT 
           valueFrom:
