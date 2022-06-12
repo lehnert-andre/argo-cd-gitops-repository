@@ -2,14 +2,12 @@ kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
   name: app-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
   - http:
       paths:
       - pathType: Prefix
-        path: "/kustomize/dev(/|$)(.*)"
+        path: "/kustomize/dev"
         backend:
           service:
             name: app-service
