@@ -33,6 +33,10 @@ spec:
         - name: http
           containerPort: 8083
         env:
+        - name: IMAGE 
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.template.spec.containers.[name=app-container].image
         - name: ENVIRONMENT 
           valueFrom:
             configMapKeyRef:
